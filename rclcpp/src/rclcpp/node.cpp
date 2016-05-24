@@ -289,6 +289,28 @@ Node::list_parameters(
   return result;
 }
 
+std::vector<std::string>
+Node::get_node_names() const
+{
+  std::vector<std::string> vector_node_names;
+
+  rmw_ros_meta_t* ros_meta_data = rmw_get_node_names();
+
+  //check if rmw_get_node_names return a something
+  if(ros_meta_data == NULL)
+    return vector_node_names;
+
+  int i;
+  //copy the node names to the structure
+  for(i = 0; i < ros_meta_data->count; i++){
+    vector_node_names.push_back(std::string( ros_meta_data->node_names[i].data));
+  }
+
+  rmw_destroy_ros_meta(ros_meta_data);
+
+  return vector_node_names;  
+}
+
 std::map<std::string, std::string>
 Node::get_topic_names_and_types() const
 {
