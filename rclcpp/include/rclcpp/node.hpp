@@ -278,6 +278,10 @@ public:
   list_parameters(const std::vector<std::string> & prefixes, uint64_t depth) const;
 
   RCLCPP_PUBLIC
+  std::vector<std::string>
+  get_node_names() const;
+
+  RCLCPP_PUBLIC
   std::map<std::string, std::string>
   get_topic_names_and_types() const;
 
